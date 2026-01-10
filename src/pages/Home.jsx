@@ -1,22 +1,46 @@
+import localData from '../../localData';
 import CountryCard from '../components/CountryCard'
+import { useState } from 'react';
 
 function Home() {
+    const [usrInput, setInput] = useState('');
+    const [usrRegion, setRegion] = useState('');
+
+    let searchHandler = (e) => {
+        setInput(e.target.value);
+    };
+
+    let selectHandler = (e) => {
+        setRegion(e.target.value);
+    }
+
     return (
         <>
             <div className="user-input">
-                <input type="text" placeholder="Search for a country..." />
-                <select name="countDD" aria-required>
-                        <option className="filterOp0" value="" aria-disabled>Filter by Region</option>
-                        <option value="mx">Mexico</option>
-                        <option value="jp">Japan</option>
-                        <option value="usa">United States</option>
-                </select>
-            </div>
-            <main>
-            <CountryCard />
-            </main>
-        </>
-    )
+                {/* Here is our search bar. It doesn't need to be part of a form for what we are doing. This should help update the countries on our page to anything that has a matching token */}
+                <input onChange={searchHandler} type="search" id="usrSearch" name="usrSearch" value={usrInput} placeholder="Search for a country..." />
+                {/* To avoid sifting through the data myself and making mistakes, I've set this up to automatically add the regions specified. If there is any change to the regions in the data, it will be reflected in this set of options */}
+                <select name="countDD" onChange={selectHandler}>
+                    {/* I set this first option so that we have a nothing state. */}
+                    <option className="filterOp0" value="selector" aria-disabled>Filter by Region</option>
+                    {/* (...new Set) This says, make a new set. Only the region value is exctracted and then added to the set. The [] makes it an array */}
+                    {[...new Set(localData.map(item => item.region))].map((region) => (
+                    <option key={region} value={region}>{region}</option>
+                ))}
+            </select>
+        </div>
+        <main>
+                {localData.filter((data) => {
+                    return (
+                        data.name.common.toLowerCase().includes(usrInput.toLowerCase()) && (usrRegion === '' ||data.region.toLowerCase() === usrRegion.toLowerCase() || usrRegion === 'selector')
+                    )
+                })
+                    .map((data) => {
+                        return <CountryCard key={data.name.common} count={data} />
+                    })}
+        </main>
+    </>
+)
 }
 
 export default Home;

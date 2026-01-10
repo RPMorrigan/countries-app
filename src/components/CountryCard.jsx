@@ -1,13 +1,20 @@
-function CountryCard() {
-    const flag = 'https://upload.wikimedia.org/wikipedia/commons/b/b0/Transgender_Pride_flag.svg';
-    const countryName = 'Lezbos';
-    const countryDesc = `This is the most gayest empire on earth.`;
+function CountryCard({ count }) {
+    const flag = count.flags.svg;
+    const name = count.name.common;
+    const population = count.population.toLocaleString();
+    const capital = count.capital;
+    const region = count.region;
+    
     return (
-        <div className='card'>
-            <img src={flag} alt={countryName} />
+        <div className="card">
+            <img src={flag} alt={name} />
             <div className="card-content">
-                <h2>{countryName}</h2>
-                <p>{countryDesc}</p>
+                <h3>{name}</h3>
+                <p><span>Population:</span> {population}
+                    <br/>
+                    <span>Capital:</span> {capital}
+                    <br/>
+                <span>Region:</span> {region}</p>
             </div>
         </div>
     )
