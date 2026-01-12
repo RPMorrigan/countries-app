@@ -27,7 +27,7 @@ function Home() {
                     {/* I set this first option so that we have a nothing state. */}
                     <option className="filterOp0" value="selector" aria-disabled>Filter by Region</option>
                     {/* (...new Set) This says, make a new set. Only the region value is exctracted and then added to the set. The [] makes it an array */}
-                    {[...new Set(localData.map(item => item.region))].map((region) => (
+                    {[...new Set(localData.map(item => item.region))].sort().map((region) => (
                     <option key={region} value={region}>{region}</option>
                 ))}
             </select>
