@@ -36,7 +36,7 @@ function Home() {
                 {/* Local data is what we've extracted from our raw json. We are filtering it based on the user's input and selected region */}
                 {localData.filter((data) => {
                     return (
-                        // There is 2 sections to this filter. The first checks if the user's input is included in the country's name. The second checks if the user's selected region matches the country's region. If usrRegion is blank, it will return all regions.
+                        // There is 2 sections to this filter. The first checks if the user's input is included in the country's name, this includes partial matches. The second checks if the user's selected region matches the country's region. If usrRegion is blank, it will return all regions.
                         data.name.common.toLowerCase().includes(usrInput.toLowerCase()) && (usrRegion === '' ||data.region.toLowerCase() === usrRegion.toLowerCase() || usrRegion === 'selector')
                     )
                 })
