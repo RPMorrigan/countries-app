@@ -3,7 +3,7 @@
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 :root {
-    --box-shadow: grey;
+
 }
 
 body {
@@ -60,23 +60,7 @@ nav {
 
 h1 {
     height: 100%;
-    font-size: 1.5rem;
-}
 
- h1 a, p a{
-    margin: 0;
-    text-decoration: none;
-    color: black;
- }
-
- p a {
-    margin-right: 1rem;
-    font-weight: bold;
- }
-
- /* User Input */
-
-.user-input {
     display: flex;
     flex-flow: row nowrap;
     padding: 1rem;
@@ -101,6 +85,8 @@ h1 {
 
 select {
     margin-right: 2rem;
+    text-align: center;
+    margin-top: 0;
 }
 
 main {
@@ -110,19 +96,9 @@ main {
     justify-content: center;
     width: 100%;
     margin: 0;
-}
-
-/* Card Style */
-
-.card {
-    display: flex;
     flex-flow: column nowrap;
     height: 20rem;
     width: 15rem;
-    transition: transform 50ms ease;
-    border-radius: 0.25rem;
-    box-shadow: 0 0.25rem 0.5rem var(--box-shadow);
-}
 
 .card:hover {
     transform: scale(1.05);
