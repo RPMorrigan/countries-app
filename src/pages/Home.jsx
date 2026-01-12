@@ -3,9 +3,12 @@ import CountryCard from '../components/CountryCard'
 import { useState } from 'react';
 
 function Home() {
+    // usrInput keeps the value of of whatever a user has typed into the search bar.
+    // usrRegion changes with a different selection on our dropdown.
     const [usrInput, setInput] = useState('');
     const [usrRegion, setRegion] = useState('');
 
+    // We need this to extract each change to our search bar, and the second handler, selectHandler, does the same for our dropdown.
     let searchHandler = (e) => {
         setInput(e.target.value);
     };
@@ -29,12 +32,16 @@ function Home() {
                 ))}
             </select>
         </div>
-        <main>
+            <main>
+                {/* Local data is what we've extracted from our raw json. We are filtering it based on the user's input and selected region */}
                 {localData.filter((data) => {
                     return (
+                        // There is 2 sections to this filter. The first checks if the user's input is included in the country's name. The second checks if the user's selected region matches the country's region. If usrRegion is blank, it will return all regions.
                         data.name.common.toLowerCase().includes(usrInput.toLowerCase()) && (usrRegion === '' ||data.region.toLowerCase() === usrRegion.toLowerCase() || usrRegion === 'selector')
                     )
                 })
+                    // Once our data is filtered to what the user is requesting, we map each item to our CountryCard component.
+                    // We include a key with the country's name to avoid react issues.
                     .map((data) => {
                         return <CountryCard key={data.name.common} count={data} />
                     })}
