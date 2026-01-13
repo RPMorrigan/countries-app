@@ -4,6 +4,7 @@
 * {
     font-family: 'Nunito Sans';
 }
+
 :root {
     --box-shadow: lightgrey;
 }
@@ -44,7 +45,6 @@ h1 {
 .user-input {
     display: flex;
     flex-flow: row nowrap;
-    margin: 4rem;
     width: 95%;
     margin: 2rem;
     justify-content: space-between;
