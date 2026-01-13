@@ -11,7 +11,7 @@ function App() {
     // The things inside BrowserRouter creates a visible link which points to our other pages. Though the stuff between Routes doesn't render anything to the page.
     <BrowserRouter>
       <nav>
-        <h1><Link to="/">Where in the World?</Link></h1>
+        <h1><Link to="/">Where in the world?</Link></h1>
         <p><Link to="/SavedCountries">Saved Countries</Link></p>
       </nav>
       <Routes>
