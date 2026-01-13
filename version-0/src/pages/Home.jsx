@@ -18,7 +18,7 @@ function Home() {
     }
 
     return (
-        <div className="home-page">
+        <>
             <div className="user-input">
                 {/* Here is our search bar. It doesn't need to be part of a form for what we are doing. This should help update the countries on our page to anything that has a matching token */}
                 <input onChange={searchHandler} type="search" id="usrSearch" name="usrSearch" value={usrInput} placeholder="Search for a country..." />
@@ -46,7 +46,7 @@ function Home() {
                         return <CountryCard key={data.name.common} count={data} />
                     })}
         </main>
-    </div>
+    </>
 )
 }
 
