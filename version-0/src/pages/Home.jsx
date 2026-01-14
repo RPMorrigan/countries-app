@@ -23,7 +23,7 @@ function Home() {
                 {/* Here is our search bar. It doesn't need to be part of a form for what we are doing. This should help update the countries on our page to anything that has a matching token */}
                 <input onChange={searchHandler} type="search" id="usrSearch" name="usrSearch" value={usrInput} placeholder="Search for a country..." />
                 {/* To avoid sifting through the data myself and making mistakes, I've set this up to automatically add the regions specified. If there is any change to the regions in the data, it will be reflected in this set of options */}
-                <select name="countDD" onChange={selectHandler}>
+                <select name="countDD" onChange={selectHandler} className={ usrRegion === 'selector' ? 'placeholder' : '' } value={usrRegion}>
                     {/* I set this first option so that we have a nothing state. */}
                     <option className="filterOp0" value="selector" aria-disabled>Filter by Region</option>
                     {/* (...new Set) This says, make a new set. Only the region value is exctracted and then added to the set. The [] makes it an array */}
