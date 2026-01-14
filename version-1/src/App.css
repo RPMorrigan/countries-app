@@ -113,6 +113,11 @@ img {
     object-position: center;
 }
 
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
 h3 {
     margin: 0;
 }
