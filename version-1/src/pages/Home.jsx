@@ -41,11 +41,12 @@ function Home() {
                             Filter by Region
                         </option>
 
-                        {/* (...new Set) This says, make a new set. Only the region value is exctracted and then added to the set. Because it's wrapped in {} it becomes an array */}
+                        {/* (...new Set) Set is useful here because it only allowes for one instance of a piece of data to be added. So it is uniquely suited for this data. The '...' simply instructs our code to itterate through content */}
                         {
                             [...new Set(localData.map(item => item.region))]
                                 .sort().map((region) => (
-                            <option key={region} value={region}>{region}</option>
+                                    <option key={region} value={region}>{region}</option>
+                                    // Because each instance of a region is unique, the 'key' prop can also be set to region
                         ))}
                     </select>
                 </div>
@@ -55,7 +56,8 @@ function Home() {
                     {localData.filter((data) => {
                         return (
                             // There is 2 sections to this filter. The first checks if the user's input is included in the country's name, this includes partial matches. The second checks if the user's selected region matches the country's region. If usrRegion is blank, it will return all regions.
-                            data.name.common.toLowerCase().includes(usrInput.toLowerCase())
+                            data.name.common.toLowerCase()
+                                .includes(usrInput.toLowerCase())
                             &&
                             (usrRegion === '' || data.region.toLowerCase() === usrRegion.toLowerCase() || usrRegion === 'selector')
                         )

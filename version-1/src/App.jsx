@@ -14,6 +14,8 @@ function App() {
         <h1><Link to="/">Where in the world?</Link></h1>
         <p><Link to="/SavedCountries">Saved Countries</Link></p>
       </nav>
+
+      {/* Routes provide pathing for a document to redirect you to the other document. */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/country-detail/:countryName" element={<CountryDetail />} />
