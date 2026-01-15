@@ -1,12 +1,24 @@
 import localData from '../../localData';
 import CountryCard from '../components/CountryCard'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Home() {
     // usrInput keeps the value of of whatever a user has typed into the search bar.
     // usrRegion changes with a different selection on our dropdown.
     const [usrInput, setInput] = useState('');
     const [usrRegion, setRegion] = useState('');
+
+    const endPoint = 'https://restcountries.com/v3.1/independent?status=true&fields=flag,capital,name,population,region,borders';
+
+    async function fetchData() {
+        try {
+            const response = await fetch(endPoint);
+        }
+        catch(error) {
+            console.log(error)
+        }
+        console.log(response);
+    }
 
     // We need this to extract each change to our search bar, and the second handler, selectHandler, does the same for our dropdown.
     let searchHandler = (e) => {
@@ -60,6 +72,8 @@ function Home() {
                                 .includes(usrInput.toLowerCase())
                             &&
                             (usrRegion === '' || data.region.toLowerCase() === usrRegion.toLowerCase() || usrRegion === 'selector')
+                            // This statement is inclusive. So it would say, if the first condition is met AND if the selector is blank, or the user's input matches exactly, or if the region is a match for the selector, render.
+                            // This way we don't have to attempt to exclude countries. Which works well alongside 'Set()'
                         )
                     })
                         // Once our data is filtered to what the user is requesting, we map each item to our CountryCard component.
