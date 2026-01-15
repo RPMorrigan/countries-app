@@ -74,6 +74,10 @@ select {
     box-shadow: 0 0 0.5rem var(--box-shadow);
 }
 
+select option.filterOp0 {
+    color: lightgrey;
+}
+
 main {
     display: flex;
     flex-flow: row wrap;

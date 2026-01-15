@@ -16,7 +16,7 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/CountryDetail/:name" element={<CountryDetail />} />
+        <Route path="/country-detail/:countryName" element={<CountryDetail />} />
         <Route path="/SavedCountries" element={<SavedCountries />} />
       </Routes>
     </BrowserRouter>
