@@ -138,9 +138,79 @@ span {
     color: grey;
 }
 
+.big-wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.h-wrap{
+    margin: 1rem 0 0.75rem 0;
+    padding: 0;
+}
+
+.h-wrap h2 {
+    margin: 0 0 0.5rem 0;
+}
+
 .wrapper {
     display: flex;
     flex-flow: row wrap;
+}
+
+.form-wrap {
+    display: flex;
+    flex-flow: column;
+}
+
+.user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 33rem;
+}
+
+.user-form input,
+.user-form select{
+    background-color: white;
+    padding-left: 1.5rem;
+    width: 28.5rem;
+    height: 3.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.75rem lightgrey,
+                0 0 0.5rem hsl(0 0 70%);
+}
+
+.user-form select {
+    text-align: left;
+    color: hsl(0 0 50%);
+    width: 30rem;
+}
+
+.user-form textarea {
+    resize: none;
+    height: 12rem;
+    width: 27rem;
+    font-size: 1rem;
+    border: none;
+    padding: 1.5rem;
+    align-items: center;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.75rem lightgrey,
+                0 0 0.5rem hsl(0 0 70%);
+}
+
+form button {
+    height: 2.5rem;
+    width: 7rem;
+    background: #7672ce;
+    color: white;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0 0 1rem hsl(0 0 70);
 }
 
 @media (max-width: 800px){
@@ -153,6 +223,7 @@ span {
     .user-input input {
         width: 30rem;
     }
+
 
     select {
         width: 11rem;

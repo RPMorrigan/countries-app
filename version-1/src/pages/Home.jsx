@@ -1,6 +1,6 @@
 import localData from '../../localData';
 import CountryCard from '../components/CountryCard'
-import { useState, useEffect } from 'react';
+import { useState  } from 'react';
 
 function Home() {
     // usrInput keeps the value of of whatever a user has typed into the search bar.
@@ -8,17 +8,19 @@ function Home() {
     const [usrInput, setInput] = useState('');
     const [usrRegion, setRegion] = useState('');
 
-    const endPoint = 'https://restcountries.com/v3.1/independent?status=true&fields=flag,capital,name,population,region,borders';
+    // const endPoint = 'https://restcountries.com/v3.1/independent?status=true&fields=flag,capital,name,population,region,borders';
 
-    async function fetchData() {
-        try {
-            const response = await fetch(endPoint);
-        }
-        catch(error) {
-            console.log(error)
-        }
-        console.log(response);
-    }
+    // fetchData();
+
+    // async function fetchData() {
+    //     try {
+    //         const response = await fetch(endPoint);
+    //     }
+    //     catch(error) {
+    //         console.log(error)
+    //     }
+    //     console.log(response); 
+    // }
 
     // We need this to extract each change to our search bar, and the second handler, selectHandler, does the same for our dropdown.
     let searchHandler = (e) => {

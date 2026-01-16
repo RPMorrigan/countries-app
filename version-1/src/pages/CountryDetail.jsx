@@ -10,7 +10,12 @@ function CountryDetail({ countries }) {
         <>
             <button>Back</button>
             <img />
-            <h2>{ countryName }</h2>
+            <h2>{countryName}</h2>
+            <button>Save</button>
+            <p>Population:</p>
+            <p>Capitol:</p>
+            <p>Region:</p>
+            {/* TODO: map out bordering countries */}
         </>
     )
 }
