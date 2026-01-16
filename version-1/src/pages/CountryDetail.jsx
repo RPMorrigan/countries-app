@@ -1,10 +1,7 @@
 import { useParams } from "react-router-dom";
 
-function CountryDetail({ countries }) {
+function CountryDetail() {
     const countryName = useParams().countryName;
-
-    // placeholder to eliminate an error for the moment
-    console.log(countries)
 
     return (
         <>

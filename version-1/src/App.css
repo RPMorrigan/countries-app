@@ -74,10 +74,6 @@ select {
     box-shadow: 0 0 0.5rem var(--box-shadow);
 }
 
-select option.filterOp0 {
-    color: lightgrey;
-}
-
 main {
     display: flex;
     flex-flow: row wrap;
@@ -171,7 +167,7 @@ span {
 }
 
 .user-form input,
-.user-form select{
+.user-form select {
     background-color: white;
     padding-left: 1.5rem;
     width: 28.5rem;
@@ -185,7 +181,6 @@ span {
 
 .user-form select {
     text-align: left;
-    color: hsl(0 0 50%);
     width: 30rem;
 }
 

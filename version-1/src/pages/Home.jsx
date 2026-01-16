@@ -1,6 +1,6 @@
 import localData from '../../localData';
 import CountryCard from '../components/CountryCard'
-import { useState  } from 'react';
+import { useState, useEffect } from 'react';
 
 function Home() {
     // usrInput keeps the value of of whatever a user has typed into the search bar.
@@ -8,19 +8,21 @@ function Home() {
     const [usrInput, setInput] = useState('');
     const [usrRegion, setRegion] = useState('');
 
-    // const endPoint = 'https://restcountries.com/v3.1/independent?status=true&fields=flag,capital,name,population,region,borders';
+    const endPoint = 'https://restcountries.com/v3.1/independent?status=true&fields=flag,capital,name,population,region,borders';
 
-    // fetchData();
+    // useEffect(
+    //     async function fetchData() {
+    //         try {
+    //             const response.json() = await fetch(endPoint);
+    //         }
+    //         catch(error) {
+    //             console.log(error)
+    //         }
+    //     }), [];
 
-    // async function fetchData() {
-    //     try {
-    //         const response = await fetch(endPoint);
-    //     }
-    //     catch(error) {
-    //         console.log(error)
-    //     }
-    //     console.log(response); 
-    // }
+    const response.json() = await fetch(endpoint);
+
+    console.log(response);
 
     // We need this to extract each change to our search bar, and the second handler, selectHandler, does the same for our dropdown.
     let searchHandler = (e) => {
@@ -49,9 +51,7 @@ function Home() {
                     <select name="countDD" onChange={selectHandler}>
 
                         {/* I set this first option so that we have a nothing state. */}
-                        <option className="filterOp0"
-                            value="selector"
-                            aria-disabled>
+                        <option value="selector" aria-disabled>
                             Filter by Region
                         </option>
 
