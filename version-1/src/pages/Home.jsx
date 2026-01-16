@@ -1,4 +1,3 @@
-import localData from '../../localData';
 import CountryCard from '../components/CountryCard'
 import { useState, useEffect } from 'react';
 
@@ -7,22 +6,26 @@ function Home() {
     // usrRegion changes with a different selection on our dropdown.
     const [usrInput, setInput] = useState('');
     const [usrRegion, setRegion] = useState('');
+    const [countries, setCountries] = useState([])
 
-    const endPoint = 'https://restcountries.com/v3.1/independent?status=true&fields=flag,capital,name,population,region,borders';
+    const apiRequest = async () =>  {
+        try {
+            let response = await fetch(
+                'https://restcountries.com/v3.1/independent?status=true&fields=flag,capital,name,population,region,borders'
+            );
+            const data = await response.json();
+            console.log(data);
+            setCountries(data);           
+        } catch (error) {
+      console.log('Error: ' + error.message);
+        }
+    };
 
-    // useEffect(
-    //     async function fetchData() {
-    //         try {
-    //             const response.json() = await fetch(endPoint);
-    //         }
-    //         catch(error) {
-    //             console.log(error)
-    //         }
-    //     }), [];
+    useEffect(() => {
+        apiRequest();
+    }, []);
 
-    const response.json() = await fetch(endpoint);
-
-    console.log(response);
+    console.log(countries);
 
     // We need this to extract each change to our search bar, and the second handler, selectHandler, does the same for our dropdown.
     let searchHandler = (e) => {
@@ -57,7 +60,7 @@ function Home() {
 
                         {/* (...new Set) Set is useful here because it only allowes for one instance of a piece of data to be added. So it is uniquely suited for this data. The '...' simply instructs our code to itterate through content */}
                         {
-                            [...new Set(localData.map(item => item.region))]
+                            [...new Set(countries.map(item => item.region))]
                                 .sort().map((region) => (
                                     <option key={region} value={region}>{region}</option>
                                     // Because each instance of a region is unique, the 'key' prop can also be set to region
@@ -66,8 +69,8 @@ function Home() {
                 </div>
                 <main>
 
-                    {/* Local data is what we've extracted from our raw json. We are filtering it based on the user's input and selected region */}
-                    {localData.filter((data) => {
+                    {/* countries is what we've extracted from our API call. We are filtering it based on the user's input and selected region */}
+                    {countries.filter((data) => {
                         return (
                             // There is 2 sections to this filter. The first checks if the user's input is included in the country's name, this includes partial matches. The second checks if the user's selected region matches the country's region. If usrRegion is blank, it will return all regions.
                             data.name.common.toLowerCase()

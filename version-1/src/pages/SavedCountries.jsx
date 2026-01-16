@@ -11,7 +11,7 @@ function SavedCountries() {
             <form className="user-form">
                 <input type="text" placeholder="Full name" />
                 <input type="email" placeholder="Email" />
-                    <select name="country-add-select" id="">
+                    <select name="country-add-select" id="selector">
                         <option className="option-grey">Country</option>
                 </select>
                     <textarea placeholder="Bio" />
