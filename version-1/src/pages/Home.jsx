@@ -1,31 +1,12 @@
 import CountryCard from '../components/CountryCard'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-function Home() {
+function Home({ countries}) {
     // usrInput keeps the value of of whatever a user has typed into the search bar.
     // usrRegion changes with a different selection on our dropdown.
     const [usrInput, setInput] = useState('');
     const [usrRegion, setRegion] = useState('');
-    const [countries, setCountries] = useState([])
 
-    const apiRequest = async () =>  {
-        try {
-            let response = await fetch(
-                'https://restcountries.com/v3.1/independent?status=true&fields=flag,capital,name,population,region,borders'
-            );
-            const data = await response.json();
-            console.log(data);
-            setCountries(data);           
-        } catch (error) {
-      console.log('Error: ' + error.message);
-        }
-    };
-
-    useEffect(() => {
-        apiRequest();
-    }, []);
-
-    console.log(countries);
 
     // We need this to extract each change to our search bar, and the second handler, selectHandler, does the same for our dropdown.
     let searchHandler = (e) => {
@@ -54,7 +35,7 @@ function Home() {
                     <select name="countDD" onChange={selectHandler}>
 
                         {/* I set this first option so that we have a nothing state. */}
-                        <option value="selector" aria-disabled>
+                        <option value="selector">
                             Filter by Region
                         </option>
 
