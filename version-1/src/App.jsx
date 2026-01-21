@@ -13,7 +13,7 @@ function App() {
   const apiRequest = async () =>  {
         try {
             let response = await fetch(
-                'https://restcountries.com/v3.1/independent?status=true&fields=flags,capital,name,population,region,borders'
+                'https://restcountries.com/v3.1/independent?status=true&fields=flags,capital,name,population,region,borders,cca3'
             );
             const data = await response.json();
             console.log(data);

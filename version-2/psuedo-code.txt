@@ -1,0 +1,167 @@
+==================================
+🧠 VERSION 2 PSEUDO-CODE WORKSHEET
+==================================
+
+This is our WHAT, WHEN, WHERE, HOW framework for working with data:
+
+1. WHAT data should we store & retrieve?
+   What kind of HTTP request do we need to send, and to what API endpoint?
+   If we are sending a POST request, what do we need to send in the request body, and what is the data type?
+   What would we get back in the response, and what is the data t ype?
+
+2. WHEN should we store & retrieve the data?
+   What event or user action is the trigger, such as clicking a button, submitting a form, or loading a page?
+
+3. WHERE does this happen in the code?
+   What component, page or function?
+
+4. HOW do we accomplish this?
+   What steps do we need to take?
+   Do we need to...
+   - make any GET or POST requests to an API endpoint?
+   - render anything in JSX?
+   - make any functions? If so, when would we call those functions?
+   - use any useState or useEffect hooks?
+     Remember: This is pseudo-code. Don't write code yet — just outline the actions in plain language.
+
+✨ YOUR TASK: Fill in the answers to each WHAT/WHEN/WHERE/HOW question below for the 3 pieces of data.
+
+==================================
+📊 FORM DATA
+==================================
+
+========================
+🔶 STORING FORM DATA
+========================
+
+❓ WHAT...
+TYPE OF HTTP REQUEST (GET OR POST): POST
+API ENDPOINT: /add-one-user
+
+REQUEST BODY DATA TYPE (if applicable): Object
+REQUEST BODY (if applicable):
+{
+  "name": "Alice",
+  "country_name": "Germany",
+  "email": "alice@example.com",
+  "bio": "A little about Alice"
+}
+
+RESPONSE DATA TYPE: string
+RESPONSE: "Success! User has been added."
+
+❓ WHEN: When adding a new user
+
+❓ WHERE: In my saved countries page
+
+❓ HOW:
+Step 1: Navigate to saved countries page from the home page by clicking the link on the top right (in the nav)
+Step 2: Fill out form.
+Step 3: Submit data. This then sends the POST request to the API.
+Step 4: Api returns a string to confirm the successful addition of a user.
+Add more steps as needed!
+
+========================
+🔶 RETRIEVING FORM DATA
+========================
+
+❓ WHAT...
+TYPE OF HTTP REQUEST (GET OR POST): GET
+API ENDPOINT: /get-all-saved-countries
+
+REQUEST BODY DATA TYPE (if applicable): N/A
+REQUEST BODY (if applicable): N/A
+
+RESPONSE DATA TYPE: Array of objects
+RESPONSE: A json of all countries found in the array.
+
+❓ WHEN: When a user has filled out the form and added a few countries to their personal list.
+
+❓ WHERE: On the saved countries page.
+
+❓ HOW:
+Step 1: The page should be able to which user is currently accessing the website.
+Step 2: After ensuring we have the correct user, we call the list of countries and render them to the page.
+Step 3: The username/handle should appear at the bottom in a welcome message reading, "Welcomp back, [user]!"
+Add more steps as needed!
+
+===================================
+📊 SAVED COUNTRIES DATA
+===================================
+
+========================
+🔶 STORING SAVED COUNTRIES DATA
+========================
+
+❓ WHAT...
+TYPE OF HTTP REQUEST (GET OR POST): ------
+API ENDPOINT: ------
+
+REQUEST BODY DATA TYPE (if applicable): ------
+REQUEST BODY (if applicable): ------
+
+RESPONSE DATA TYPE: ------
+RESPONSE: ------
+
+❓ WHEN: ------
+
+❓ WHERE: ------
+
+❓ HOW:
+Step 1: ------
+Step 2: ------
+Step 3: ------
+Add more steps as needed!
+
+========================
+🔶 RETRIEVING SAVED COUNTRIES DATA
+========================
+
+❓ WHAT...
+TYPE OF HTTP REQUEST (GET OR POST): ------
+API ENDPOINT: ------
+
+REQUEST BODY DATA TYPE (if applicable): ------
+REQUEST BODY (if applicable): ------
+
+RESPONSE DATA TYPE: ------
+RESPONSE: ------
+
+❓ WHEN: ------
+
+❓ WHERE: ------
+
+❓ HOW:
+Step 1: ------
+Step 2: ------
+Step 3: ------
+Add more steps as needed!
+
+=================================
+📊 COUNTRY COUNTS DATA
+=================================
+
+========================
+🔶 STORING & RETRIEVING COUNTRY COUNTS DATA
+========================
+NOTE: We combine storing & retrieving country counts data into one section because they always happen together. Each time we look up a country’s view count, we also need to increase it and save the new total.
+
+❓ WHAT...
+TYPE OF HTTP REQUEST (GET OR POST): ------
+API ENDPOINT: ------
+
+REQUEST BODY DATA TYPE (if applicable): ------
+REQUEST BODY (if applicable): ------
+
+RESPONSE DATA TYPE: ------
+RESPONSE: ------
+
+❓ WHEN: ------
+
+❓ WHERE: ------
+
+❓ HOW:
+Step 1: ------
+Step 2: ------
+Step 3: ------
+Add more steps as needed!

@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
-const CountryDetail = ({ countries} = {}) => {
+const CountryDetail = ({ countries } = {}) => {
     const { countryName } = useParams();
+    const navigate = useNavigate();
     const country = countries.find(count => count.name.common.toLowerCase() === countryName.toLowerCase());
 
     if (!country) {
@@ -10,21 +11,30 @@ const CountryDetail = ({ countries} = {}) => {
 
     return (
         <div className="detail-page" >
-            <button>Back</button>
-            <img src={country.flags.svg} />
-            <h2>{countryName}</h2>
+            <button onClick={() => navigate("/")}>Back</button>
+            <div className="main-content">
+            <img src={ country.flags.svg } />
+            <div className="details">
+            <h2>{ countryName }</h2>
             <button>Save</button>
-            <div>
-            <p>Population: {country.population.toLocaleString()}</p>
-            <p>Capital: {country.capital}</p>
-            <p>Region: {country.region}</p>
+            <p>Population: { country.population.toLocaleString() }</p>
+            <p>Capital: { country.capital }</p>
+            <p>Region: { country.region }</p>
+            </div>
             </div>
 
             {/* TODO make border buttons */}
 
-            <div>
-                <h3>This is where I would put my border countries... IF I HAD ANY!</h3>
-                <button>Border</button>
+            <div className="border-countries">
+                <h3>Bordering Countries</h3>
+                <div className="border-buttons">
+                {country.borders?.map((item) => {
+                    const borderCountry = countries.find(country => country.cca3 === item);
+                    return borderCountry ? (
+                        <button key={item}>{borderCountry.name.common}</button>
+                    ) : null;
+                })}
+                    </div>
             </div>
 
         </div>
