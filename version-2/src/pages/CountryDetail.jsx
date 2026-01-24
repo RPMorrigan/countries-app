@@ -1,30 +1,46 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
-const CountryDetail = ({ countries} = {}) => {
+const CountryDetail = ({ countries = [] }) => {
     const { countryName } = useParams();
-    const country = countries.find(count => count.name.common.toLowerCase() === countryName.toLowerCase());
-
+    const navigate = useNavigate();
+    const country = countries?.find(count => count.name.common.toLowerCase() === countryName.toLowerCase());
+        
     if (!country) {
         return <div> Country not found!</div>
     }
 
     return (
         <div className="detail-page" >
-            <button>Back</button>
-            <img src={country.flags.svg} />
-            <h2>{countryName}</h2>
-            <button>Save</button>
-            <div>
-            <p>Population: {country.population.toLocaleString()}</p>
-            <p>Capital: {country.capital}</p>
-            <p>Region: {country.region}</p>
+            <div className="main-content">
+            <button onClick={() => navigate("/")}>Back</button>
+                <img src={country.flags.svg} alt={country.name.common} />
+            <div className="details">
+            <h2>{ countryName }</h2>
+                    <button className="save-button">Save</button>
+                    <div className="details-paragraphs">
+                    {/* to local string formats the raw digits into something more legible */}
+                    <p>Population: {country.population.toLocaleString()}</p>
+                    {/* I see a lot of exception handling when I'm looking for solutions, so I am attempting to remember to add these things */}
+            <p>Capital: { country.capital?.[0] || 'N/A' }</p>
+            <p>Region: { country.region }</p>
+                    </div>
+                <div className="border-countries">
+                <p>Bordering Countries</p>
+                <div className="border-buttons">
+                {country.borders?.map((item) => {
+                    const borderCountry = countries.find(country => country.cca3 === item);
+                    return borderCountry ? (
+                        <button
+                            key={item}
+                            onClick={() => navigate(`/country-detail/${borderCountry.name.common}`)}
+                        >
+                            {borderCountry.name.common}
+                        </button>
+                    ) : null;
+                })}
+                    </div>
             </div>
-
-            {/* TODO make border buttons */}
-
-            <div>
-                <h3>This is where I would put my border countries... IF I HAD ANY!</h3>
-                <button>Border</button>
+                </div>
             </div>
 
         </div>

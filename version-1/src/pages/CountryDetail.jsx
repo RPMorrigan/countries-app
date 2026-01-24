@@ -4,7 +4,7 @@ const CountryDetail = ({ countries } = {}) => {
     const { countryName } = useParams();
     const navigate = useNavigate();
     const country = countries.find(count => count.name.common.toLowerCase() === countryName.toLowerCase());
-
+        
     if (!country) {
         return <div> Country not found!</div>
     }

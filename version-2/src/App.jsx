@@ -8,12 +8,13 @@ import "./App.css";
 
 // Using components, we can make our code clean and easily managed.
 function App() {
-  const [countries, setCountries] = useState([])
+  const [countries, setCountries] = useState([]);
 
+// API calls need to wait on the API to respond as there is a disparity in how fast the page loads vs the 
   const apiRequest = async () =>  {
         try {
             let response = await fetch(
-                'https://restcountries.com/v3.1/independent?status=true&fields=flags,capital,name,population,region,borders'
+                'https://restcountries.com/v3.1/independent?status=true&fields=flags,capital,name,population,region,borders,cca3'
             );
             const data = await response.json();
             console.log(data);
@@ -41,7 +42,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home countries={countries} />} />
         <Route path="/country-detail/:countryName" element={<CountryDetail countries={countries} />} />
-        <Route path="/saved-countries" element={<SavedCountries />} />
+        <Route path="/saved-countries" element={<SavedCountries countries={countries} />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,7 +1,7 @@
 import CountryCard from '../components/CountryCard'
 import { useState } from 'react';
 
-function Home({ countries}) {
+function Home({ countries = [] }) {
     // usrInput keeps the value of of whatever a user has typed into the search bar.
     // usrRegion changes with a different selection on our dropdown.
     const [usrInput, setInput] = useState('');
