@@ -1,8 +1,11 @@
 import { useParams, useNavigate } from "react-router-dom";
 
 const CountryDetail = ({ countries = [] }) => {
+    // Stores just the name of the necessary country
     const { countryName } = useParams();
+    // Lets us build things like a back button or set up links to bordering countries.
     const navigate = useNavigate();
+    // This says, if there is a country object with the same name as the one we're looking for in countries, load it into our variable, 'country'.
     const country = countries?.find(count => count.name.common.toLowerCase() === countryName.toLowerCase());
         
     if (!country) {

@@ -1,6 +1,10 @@
 import { useState } from 'react';
+import CountryCard from '../components/CountryCard';
 
-function SavedCountries({ countries = []}) {
+function SavedCountries({ countries = [] }) {
+    // The country data objects set/added on from our submit handler
+    const [userCountries, setUserCountries] = useState([]);
+    // Form data
     const [userData, setUserData] = useState({
         fullName: '',
         email: '',
@@ -20,14 +24,31 @@ function SavedCountries({ countries = []}) {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        console.log("New user added!")
+        console.log("New user added!");
         console.log(userData);
+
+        if (!userData.country) return;
+
+        const additionalCountry = countries?.find(
+            country => country.name.common === userData.country
+        )
+        if (userData.country) {
+            setUserCountries(prev => [...prev, additionalCountry]);
+        }
+
     };
 
     return (
         <div className="big-wrap">
             <div className="h-wrap">
-            <h2>My Saved Countries</h2>
+                <h2>My Saved Countries</h2>
+                
+                <div className="saved-countries-wrapper">
+                    {userCountries.map((country) => (
+                        <CountryCard key={ country.name.common } country={ country } />
+                    )) }
+                </div>
+
             <h2>My Profile</h2>
             </div>
 
