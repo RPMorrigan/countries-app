@@ -15,10 +15,7 @@ function SavedCountries({ countries = [] }) {
     const inputHandler = (e) => {
         const { name, value } = e.target;
         
-        setUserData({
-            ...userData,
-            [name]: value
-        });
+        setUserData({ ...userData, [name]: value });
     };
     
     const submitHandler = (e) => {
@@ -26,6 +23,13 @@ function SavedCountries({ countries = [] }) {
 
         console.log("New user added!");
         console.log(userData);
+        
+        setUserData({
+            fullName: '',
+            email: '',
+            country: '',
+            bio: '',
+        })
 
         if (!userData.country) return;
 
@@ -36,6 +40,30 @@ function SavedCountries({ countries = [] }) {
             setUserCountries(prev => [...prev, additionalCountry]);
         }
 
+    };
+
+    const storeUserData = async (data) => {
+        const response = await fetch(
+            'https://backend-answer-keys.onrender.com/add-one-user',
+            {
+                // Type of request
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',   
+                },
+
+                // Converting json to string
+                body: JSON.stringify(
+                    {
+                        name: data.fullName,
+                        country_name: data.country,
+                        email: data.email,
+                        bio: data.bio,
+                    }),
+            }
+        );
+        const result = await response.text();
+        console.log('result', result);
     };
 
     return (
