@@ -1,50 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CountryCard from '../components/CountryCard';
 
 function SavedCountries({ countries = [] }) {
     // The country data objects set/added on from our submit handler
     const [userCountries, setUserCountries] = useState([]);
+    // Allows us to fetch and use the latest user data in the API's array.
+    const [newestUserData, setNewestUserData] = useState(null);
     // Form data
-    const [userData, setUserData] = useState({
+    const [formData, setFormData] = useState({
         fullName: '',
         email: '',
         country: '',
         bio: ''
     });
 
+    // Updates our useState whenever user input changes.
     const inputHandler = (e) => {
         const { name, value } = e.target;
-        
-        setUserData({ ...userData, [name]: value });
+        // Iterates through previous data then dynamically replaces key pair values. 
+        setFormData({ ...formData, [name]: value });
     };
     
-    const submitHandler = (e) => {
-        e.preventDefault();
-
-        console.log("New user added!");
-        console.log(userData);
-        
-        setUserData({
-            fullName: '',
-            email: '',
-            country: '',
-            bio: '',
-        })
-
-        if (!userData.country) return;
-
-        const additionalCountry = countries?.find(
-            country => country.name.common === userData.country
-        )
-        if (userData.country) {
-            setUserCountries(prev => [...prev, additionalCountry]);
-        }
-
-    };
-
-    const storeUserData = async (data) => {
+    const storeFormData = async (data) => {
         const response = await fetch(
-            'https://backend-answer-keys.onrender.com/add-one-user',
+            '/api/add-one-user',
             {
                 // Type of request
                 method: 'POST',
@@ -60,11 +39,54 @@ function SavedCountries({ countries = [] }) {
                         email: data.email,
                         bio: data.bio,
                     }),
-            }
-        );
-        const result = await response.text();
-        console.log('result', result);
+                }
+            );
+            const result = await response.text();
+            console.log('result', result);
     };
+    
+        // Processes user data and then resets form.
+        const submitHandler = async (e) => {
+            e.preventDefault();
+    
+            console.log(formData);
+            await storeFormData(formData);
+    
+            // Resets the form.
+            setFormData({
+                fullName: '',
+                email: '',
+                country: '',
+                bio: '',
+            })
+    
+    };
+    
+    // Collects newest user data.
+    const getNewestUserData = async () => {
+        try {
+            const response = await fetch(
+                '/api/get-newest-user',
+                {
+                    method: 'GET',
+                }
+            );
+            const data = await response.json();
+            const userData = data[0];
+            setNewestUserData({
+                fullName: userData.name,
+                email: userData.email,
+                country: userData.country_nam,
+                bio: userData.boi,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+    getNewestUserData();
+  }, []);
 
     return (
         <div className="big-wrap">
@@ -88,7 +110,7 @@ function SavedCountries({ countries = [] }) {
                     <input
                         type="text"
                         name="fullName"
-                        value={userData.fullName}
+                        value={formData.fullName}
                         onChange={inputHandler}
                         placeholder="Full name" />
                     
@@ -96,7 +118,7 @@ function SavedCountries({ countries = [] }) {
                     <input
                         type="email"
                         name="email"
-                        value={userData.email}
+                        value={formData.email}
                         onChange={inputHandler}
                         placeholder="Email" />
                     
@@ -104,7 +126,7 @@ function SavedCountries({ countries = [] }) {
                     <select
                         name="country"
                         id="selector"
-                        value={userData.country}
+                        value={formData.country}
                         onChange={inputHandler}
                     >
                         
@@ -126,7 +148,7 @@ function SavedCountries({ countries = [] }) {
                     <textarea
                         name="bio"
                         id="bio"
-                        value={userData.bio}
+                        value={formData.bio}
                         onChange={inputHandler}
                         placeholder="Bio"
                         />
