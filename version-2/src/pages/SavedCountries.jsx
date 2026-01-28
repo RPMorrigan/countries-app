@@ -62,7 +62,7 @@ function SavedCountries({ countries = [] }) {
     
     };
     
-    // Collects newest user data.
+    // Requests newest/latest user data.
     const getNewestUserData = async () => {
         try {
             const response = await fetch(
