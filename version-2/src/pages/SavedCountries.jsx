@@ -76,7 +76,7 @@ function SavedCountries({ countries = [] }) {
             setNewestUserData({
                 fullName: userData.name,
                 email: userData.email,
-                country: userData.country_nam,
+                country: userData.country_name,
                 bio: userData.boi,
             });
         } catch (error) {
