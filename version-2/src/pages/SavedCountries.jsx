@@ -3,7 +3,7 @@ import CountryCard from '../components/CountryCard';
 
 function SavedCountries({ countries = [] }) {
     // The country data objects set/added on from our submit handler
-    const [userCountries, setUserCountries] = useState([]);
+    const [userCountries, _setUserCountries] = useState([]);
     // Allows us to fetch and use the latest user data in the API's array.
     const [newestUserData, setNewestUserData] = useState(null);
     // Form data
@@ -77,7 +77,7 @@ function SavedCountries({ countries = [] }) {
                 fullName: userData.name,
                 email: userData.email,
                 country: userData.country_name,
-                bio: userData.boi,
+                bio: userData.bio,
             });
         } catch (error) {
             console.log(error);
@@ -99,7 +99,8 @@ function SavedCountries({ countries = [] }) {
                     )) }
                 </div>
 
-            <h2>My Profile</h2>
+                <h2>My Profile</h2>
+                { newestUserData ? <p>newestUserData</p> : <p>Unavailable</p> }
             </div>
 
             <div className="form-wrap">
