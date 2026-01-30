@@ -48,41 +48,46 @@ REQUEST BODY (if applicable):
 }
 
 RESPONSE DATA TYPE: string
-RESPONSE: "Success! User has been added.
+RESPONSE: "Success! User has been added."
 
-❓ WHEN: When the user adds their profile, when the user wants to save a country and when the user is updating a coutry.
+❓ WHEN: For version 2, we are focusing on submitting the form data object and to make the API request on submit.
 
-❓ WHERE: Saved countries page. Above the profile welcome message and the form.
+❓ WHERE: Saved countries page. Though our post requests could be 3 different things as the API has that much available.
 
 ❓ HOW:
 Step 1: Create a submit handler which creates the data object from the form data.
-Step 2: Send a POST request to https://backend-answer-keys.onrender.com and the correct endpoint with the correct body format specified in the APIs documentation.
-Step 3: Make sure that 
-Add more steps as needed!
+Step 2: Use the submit event to also send a POST request to (https://backend-answer-keys.onrender.com) '/api/' and the correct endpoint with the correct body format specified in the APIs documentation.
+Step 3: We'll get a reply from the API confirming that our request has come through successfully. But this can also be seen on the network tab in the developer tools which includes request/API timing.
 
 ========================
 🔶 RETRIEVING FORM DATA
 ========================
 
 ❓ WHAT...
-TYPE OF HTTP REQUEST (GET OR POST): ------
-API ENDPOINT: ------
+TYPE OF HTTP REQUEST (GET OR POST): GET
+API ENDPOINT: /get-newest-user
 
-REQUEST BODY DATA TYPE (if applicable): ------
-REQUEST BODY (if applicable): ------
+REQUEST BODY DATA TYPE (if applicable): N/A
+REQUEST BODY (if applicable): N/A
 
-RESPONSE DATA TYPE: ------
-RESPONSE: ------
+RESPONSE DATA TYPE: Array with a single object.
+RESPONSE: [
+  {
+    "user_id": 42,
+    "name": "John Smith",
+    "country_name": "Canada",
+    "email": "john@example.com",
+    "bio": "Another bio"
+  }
+]
 
-❓ WHEN: ------
+❓ WHEN: We call this after we've submitted our form data so that we can confirm that the user has been added to the API.
 
-❓ WHERE: ------
+❓ WHERE: We call this into the saved countries page to be able to display the user's details after they've given us their data.
 
 ❓ HOW:
-Step 1: ------
-Step 2: ------
-Step 3: ------
-Add more steps as needed!
+Step 1: We'll need to have this run once when the page loads.
+Step 2: If it loads, then it will render the appropriate data onto our page. Else, it will simply render the default paragraph.
 
 ===================================
 📊 SAVED COUNTRIES DATA
@@ -93,38 +98,40 @@ Add more steps as needed!
 ========================
 
 ❓ WHAT...
-TYPE OF HTTP REQUEST (GET OR POST): ------
-API ENDPOINT: ------
+TYPE OF HTTP REQUEST (GET OR POST): POST
+API ENDPOINT: /save-one-country
 
-REQUEST BODY DATA TYPE (if applicable): ------
-REQUEST BODY (if applicable): ------
+REQUEST BODY DATA TYPE (if applicable): json
+REQUEST BODY (if applicable): {
+  "country_name": "Brazil"
+}
 
-RESPONSE DATA TYPE: ------
-RESPONSE: ------
+RESPONSE DATA TYPE: string
+RESPONSE: "Success! The country is saved."
 
-❓ WHEN: ------
+❓ WHEN: This happens when you want to keep a country's data in the API rather than locally.
 
-❓ WHERE: ------
+❓ WHERE: We have a save button on each country's detail page and then again on the form submit in the saved countries page.
 
 ❓ HOW:
-Step 1: ------
-Step 2: ------
-Step 3: ------
-Add more steps as needed!
+Step 1: I set up the request to run on click and on submit.
+Step 2: The saved list can then be retrieved on state change.
 
 ========================
 🔶 RETRIEVING SAVED COUNTRIES DATA
 ========================
 
 ❓ WHAT...
-TYPE OF HTTP REQUEST (GET OR POST): ------
-API ENDPOINT: ------
+TYPE OF HTTP REQUEST (GET OR POST): GET
+API ENDPOINT: /unsave-one-country
 
-REQUEST BODY DATA TYPE (if applicable): ------
-REQUEST BODY (if applicable): ------
+REQUEST BODY DATA TYPE (if applicable): object
+REQUEST BODY (if applicable): {
+  "country_name": "Brazil"
+}
 
-RESPONSE DATA TYPE: ------
-RESPONSE: ------
+RESPONSE DATA TYPE: string
+RESPONSE: "Success! The country is unsaved."
 
 ❓ WHEN: ------
 
