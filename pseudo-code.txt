@@ -123,25 +123,32 @@ Step 2: The saved list can then be retrieved on state change.
 
 ❓ WHAT...
 TYPE OF HTTP REQUEST (GET OR POST): GET
-API ENDPOINT: /unsave-one-country
+API ENDPOINT: /get-all-saved-countries
 
-REQUEST BODY DATA TYPE (if applicable): object
-REQUEST BODY (if applicable): {
-  "country_name": "Brazil"
-}
+REQUEST BODY DATA TYPE (if applicable: N/A
+REQUEST BODY (if applicable): N/A
 
-RESPONSE DATA TYPE: string
-RESPONSE: "Success! The country is unsaved."
+RESPONSE DATA TYPE: Array of Objects
+RESPONSE: [
+  {
+    "country_name": "Japan"
+  },
+  {
+    "country_name": "Germany"
+  }
+]
 
-❓ WHEN: ------
+❓ WHEN: After a user has submitted their user data and have saved at least 1 country.
 
-❓ WHERE: ------
+❓ WHERE: On our saved countries page above the profile greeting and form.
 
 ❓ HOW:
-Step 1: ------
-Step 2: ------
-Step 3: ------
-Add more steps as needed!
+Step 1: Set up a conditional render.
+
+Step 2: On page load, check if user has submitted user data. If not, load nothing.
+
+Step 3: Otherwise, fetch the saved countries list and pass it onto our country card
+        function in order to render the cards in the appropriate place.
 
 =================================
 📊 COUNTRY COUNTS DATA
@@ -153,21 +160,24 @@ Add more steps as needed!
 NOTE: We combine storing & retrieving country counts data into one section because they always happen together. Each time we look up a country’s view count, we also need to increase it and save the new total.
 
 ❓ WHAT...
-TYPE OF HTTP REQUEST (GET OR POST): ------
-API ENDPOINT: ------
+TYPE OF HTTP REQUEST (GET OR POST): POST
+API ENDPOINT: /update-one-country-count
 
-REQUEST BODY DATA TYPE (if applicable): ------
-REQUEST BODY (if applicable): ------
+REQUEST BODY DATA TYPE (if applicable): Object
 
-RESPONSE DATA TYPE: ------
-RESPONSE: ------
+REQUEST BODY (if applicable): {
+  "country_name": "France"
+}
 
-❓ WHEN: ------
+RESPONSE DATA TYPE: Objects
+RESPONSE: {
+  "count": 3
+}
 
-❓ WHERE: ------
+❓ WHEN: When we open up a country's detail page.
+
+❓ WHERE: In the details page with the rest of the data.
 
 ❓ HOW:
-Step 1: ------
-Step 2: ------
-Step 3: ------
-Add more steps as needed!
+Step 1: Create a useEffect.
+Step 2: Have it only run once when the page loads.

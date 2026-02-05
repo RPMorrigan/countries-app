@@ -3,7 +3,7 @@ import CountryCard from '../components/CountryCard';
 
 function SavedCountries({ countries = [] }) {
     // The country data objects set/added on from our submit handler
-    const [userCountries, _setUserCountries] = useState([]);
+    const [userCountries, setUserCountries] = useState([]);
     // Allows us to fetch and use the latest user data in the API's array.
     const [newestUserData, setNewestUserData] = useState(null);
     // Form data
@@ -41,7 +41,7 @@ function SavedCountries({ countries = [] }) {
                     }),
                 }
             );
-            const result = await response.text();
+            const result = await response.json();
             console.log('result', result);
     };
     
@@ -86,21 +86,47 @@ function SavedCountries({ countries = [] }) {
 
     useEffect(() => {
     getNewestUserData();
-  }, []);
+    }, []);
+    
+    // Requests list ofuser's saved countries
+    const getUserCountries = async () => {
+        try {
+            const response = await fetch(
+                '/api/get-all-saved-countries',
+                {
+                    method: 'GET'
+                }
+            );
+            const data = await response.json();
+            setUserCountries(data);
+        } catch (error) { 
+            console.log(error);
+        }
+    }
+
+    useEffect(() => { 
+        getUserCountries();
+    }, [newestUserData]);
 
     return (
         <div className="big-wrap">
             <div className="h-wrap">
                 <h2>My Saved Countries</h2>
-                
                 <div className="saved-countries-wrapper">
-                    {userCountries.map((country) => (
-                        <CountryCard key={ country.name.common } country={ country } />
-                    )) }
+                { newestUserData ?
+                            (
+                                userCountries?.map((country) => (
+                                    <CountryCard key={country.name.common} country={country} />
+                                ))
+                             ) : (null)
+                }
                 </div>
 
-                <h2>My Profile</h2>
-                { newestUserData ? <p>newestUserData</p> : <p>Unavailable</p> }
+                {newestUserData ?
+                    <h2>{`Welcome back, ${newestUserData.fullName}!`}</h2>
+                    :
+                    <h2>My Profile</h2>
+                }
             </div>
 
             <div className="form-wrap">
