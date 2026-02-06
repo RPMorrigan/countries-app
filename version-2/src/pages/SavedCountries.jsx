@@ -84,6 +84,7 @@ function SavedCountries({ countries = [] }) {
         }
     };
 
+
     useEffect(() => {
     getNewestUserData();
     }, []);
@@ -116,7 +117,7 @@ function SavedCountries({ countries = [] }) {
                 { newestUserData ?
                             (
                                 userCountries?.map((country) => (
-                                    <CountryCard key={country.name.common} country={country} />
+                                    <CountryCard key={country} country={country} />
                                 ))
                              ) : (null)
                 }
