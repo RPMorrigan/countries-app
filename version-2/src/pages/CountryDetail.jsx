@@ -44,7 +44,7 @@ const CountryDetail = ({ countries = [] }) => {
         return <div> Country not found!</div>
     }
 
-    const getCountry = async () => {
+    const saveCountry = async () => {
         try {
             let response = await fetch(
                 '/api/save-one-country',
@@ -54,12 +54,12 @@ const CountryDetail = ({ countries = [] }) => {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        "country_name": country.name.common
+                        "country_name": countryName
                     })
                 }
             );
-            const data = await response.json();
-            console.log(data);
+            const resultText = await response.text();
+            console.log(resultText);
         } catch (error) {
             console.log('Error: ' + error.message);
         }
@@ -72,7 +72,7 @@ const CountryDetail = ({ countries = [] }) => {
                 <img src={country.flags.svg} alt={country.name.common} />
             <div className="details">
             <h2>{ countryName }</h2>
-                    <button className="save-button" onClick={getCountry}>Save</button>
+                    <button className="save-button" onClick={saveCountry}>Save</button>
                     <div className="details-paragraphs">
                     {/* View count */}
                         <p>View Count: {viewCount}</p>
