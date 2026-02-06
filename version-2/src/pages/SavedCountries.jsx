@@ -89,7 +89,7 @@ function SavedCountries({ countries = [] }) {
     getNewestUserData();
     }, []);
     
-    // Requests list ofuser's saved countries
+    // Requests list of user's saved countries
     const getUserCountries = async () => {
         try {
             const response = await fetch(
@@ -100,6 +100,7 @@ function SavedCountries({ countries = [] }) {
             );
             const data = await response.json();
             setUserCountries(data);
+            console.log(userCountries);
         } catch (error) { 
             console.log(error);
         }
@@ -107,7 +108,7 @@ function SavedCountries({ countries = [] }) {
 
     useEffect(() => { 
         getUserCountries();
-    }, [newestUserData]);
+    }, []);
 
     return (
         <div className="big-wrap">
