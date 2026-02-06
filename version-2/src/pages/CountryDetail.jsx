@@ -11,9 +11,13 @@ const CountryDetail = ({ countries = [] }) => {
     // View count
     const [viewCount, setViewCount] = useState(0);
     
+    // Runs once on page load only.
     useEffect(() => {
+        // If there's nothing in country, end the useEffect and return nothing.
         if (!country) return;
 
+        // Retrieve the the current country count by updating it and fetching it at the same time via POST request
+        // as it returns the count data in an object which is able to later be rendered for the user.
         const getViewCount = async () => {
             try {
                 let response = await fetch(
@@ -35,15 +39,19 @@ const CountryDetail = ({ countries = [] }) => {
             }
         }
         
+        // Call getViewCount every time the country name changes.
         getViewCount();
     }, [country]);
     
+    // Checks that the data is present in our console for debugging.
     console.log(viewCount);
 
+    // If for some reason, country is not found, return, "Country not found!"
     if (!country) {
         return <div> Country not found!</div>
     }
 
+    // Saves a country name into the saved countries array for our API via POST request.
     const saveCountry = async () => {
         try {
             let response = await fetch(
@@ -68,7 +76,7 @@ const CountryDetail = ({ countries = [] }) => {
     return (
         <div className="detail-page" >
             <div className="main-content">
-            <button onClick={() => navigate("/")}>Back</button>
+            <button className="back-button" onClick={() => navigate("/")}>Back</button>
                 <img src={country.flags.svg} alt={country.name.common} />
             <div className="details">
             <h2>{ countryName }</h2>

@@ -21,6 +21,8 @@ function SavedCountries({ countries = [] }) {
         setFormData({ ...formData, [name]: value });
     };
     
+
+    // Sets our user data up to be stored, then stores it into the API via POST request.
     const storeFormData = async (data) => {
         const response = await fetch(
             '/api/add-one-user',
@@ -40,7 +42,9 @@ function SavedCountries({ countries = [] }) {
                         bio: data.bio,
                     }),
                 }
-            );
+        );
+        
+            // Formats the API's reply to a json then stores it into result which is then console logged for debugging.
             const result = await response.json();
             console.log('result', result);
     };
@@ -62,7 +66,7 @@ function SavedCountries({ countries = [] }) {
     
     };
     
-    // Requests newest/latest user data.
+    // Requests newest/latest user data via GET request to the API.
     const getNewestUserData = async () => {
         try {
             const response = await fetch(
@@ -84,12 +88,12 @@ function SavedCountries({ countries = [] }) {
         }
     };
 
-
+    // Runs getNewestUserData once on page load.
     useEffect(() => {
     getNewestUserData();
     }, []);
     
-    // Requests list of user's saved countries
+    // Requests list of user's saved countries via GET request
     const getUserCountries = async () => {
         try {
             const response = await fetch(
@@ -100,7 +104,7 @@ function SavedCountries({ countries = [] }) {
             );
             const data = await response.json();
             setUserCountries(data);
-            console.log(userCountries);
+            
         } catch (error) { 
             console.log(error);
         }
@@ -115,15 +119,34 @@ function SavedCountries({ countries = [] }) {
             <div className="h-wrap">
                 <h2>My Saved Countries</h2>
                 <div className="saved-countries-wrapper">
-                { newestUserData ?
-                            (
-                                userCountries?.map((country) => (
-                                    <CountryCard key={country} country={country} />
-                                ))
-                             ) : (null)
-                }
+                    {/* When there is anything in newestUserData AND userCountries, proceed to mapping the data */}
+                    {newestUserData && userCountries?.map((countryObj) => {
+                        // Load just the country name from the simple object to make it easier to use and read.
+                        const countryName = countryObj.country_name;
+                    
+                        // Use each country name to find and match it with the actual country object from the Rest API.
+                        // Then return the object and load it into 'fullCountry' to be passed on.
+                        const fullCountry = countries.find(c =>
+                            c.name.common.toLowerCase() === countryName.toLowerCase()
+                        );
+
+                        // if fullCountry exists, pass the country code as the key
+                        // Then pass the entire object to be mapped into the country card component.
+                        if (fullCountry) {
+                            return <CountryCard key={fullCountry.cca3} country={fullCountry} />
+                        }
+
+                        // Warn is something I just found out about today while working with limited instruction from the API.
+                        // I am likely to use it in the future.
+                        console.warn(`Country not found: ${countryName}`);
+
+                        return null;
+
+                    })}
                 </div>
 
+                {/* If a user has registered, go on to render the welcome message with the user's name dynamically changed.
+                Otherwise, simply display, "My Profile" */}
                 {newestUserData ?
                     <h2>{`Welcome back, ${newestUserData.fullName}!`}</h2>
                     :
@@ -132,6 +155,7 @@ function SavedCountries({ countries = [] }) {
             </div>
 
             <div className="form-wrap">
+
 
                 <form className="user-form" onSubmit={submitHandler}>
                     

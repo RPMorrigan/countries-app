@@ -57,6 +57,8 @@ h1 {
     border-radius: 0.5rem;
     border: none;
     background: white;
+    padding-left: 1rem;
+    padding-right: 2rem;
 }
 
 .user-input input {
@@ -237,6 +239,10 @@ form button:active {
     box-shadow: 0 0 0.5rem lightgrey;
 }
 
+.back-button {
+    padding: 0.5rem 2rem;
+}
+
 .detail-page img {
     border-radius: 0.5rem;
     min-width: 20rem;
@@ -303,6 +309,13 @@ form button:active {
 .border-buttons button:active {
     background: white;
     color: #7672ce;
+}
+
+.saved-countries-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 2rem;
+    padding: 2rem;
 }
 
 @media (max-width: 800px){
