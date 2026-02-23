@@ -1,0 +1,352 @@
+@import"https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000&display=swap";
+
+/* Global */
+* {
+    font-family: 'Nunito Sans';
+}
+
+:root {
+    --box-shadow: lightgrey;
+}
+
+body {
+    margin: 0;
+}
+
+/* Navigation */
+
+nav {
+    display: flex;
+    flex-flow: row no-wrap;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0.5rem 2rem;
+    width: 100%;
+    height: fit-content;
+    box-shadow: 0 0.25rem 0.5rem var(--box-shadow);
+    box-sizing: border-box;
+ }
+
+h1 {
+    height: 100%;
+    align-content: center;
+}
+
+ h1 a, p a{
+    margin: 0;
+    text-decoration: none;
+    color: black;
+ }
+
+ /* User Input */
+
+.user-input {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 95%;
+    margin: 2rem;
+    justify-content: space-between;
+}
+
+.user-input input,
+.user-input select {
+    font-size: 1rem;
+    height: 4rem;
+    border-radius: 0.5rem;
+    border: none;
+    background: white;
+    padding-left: 1rem;
+    padding-right: 2rem;
+}
+
+.user-input input {
+    width: 20%;
+    min-width: 15rem;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    box-shadow: 0 0 0.5rem var(--box-shadow);
+}
+
+select {
+    margin-right: 2rem;
+    text-align: center;
+    margin-top: 0;
+    box-shadow: 0 0 0.5rem var(--box-shadow);
+}
+
+main {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 4rem;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Card Style */
+
+.card {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 20rem;
+    width: 15rem;
+    transition: transform 100ms ease, box-shadow 200ms ease;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 1.5rem var(--box-shadow);
+}
+
+.card:hover {
+    transform: translateY(-0.5rem) scale(1.05);
+    box-shadow: 0 0 2rem var(--box-shadow);
+}
+
+.card-content {
+    padding: 1rem;
+}
+
+img {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    width: 100%;
+    height: 45%;
+    /* This one I had to look up. To get the flags positioned and scaled correctly  */
+    object-fit: cover;
+    object-position: center;
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+h3 {
+    margin: 0;
+}
+
+span {
+    font-weight: 600;
+}
+
+.card-content p {
+    font-size: 0.85rem;
+}
+
+.filter-grey {
+    color: grey;
+}
+
+.big-wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.h-wrap{
+    margin: 1rem 0 0.75rem 0;
+    padding: 0;
+}
+
+.h-wrap h2 {
+    margin: 0 0 0.5rem 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.form-wrap {
+    display: flex;
+    flex-flow: column;
+}
+
+.user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 33rem;
+}
+
+.user-form input,
+.user-form select {
+    background-color: white;
+    padding-left: 1.5rem;
+    width: 28.5rem;
+    height: 3.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.75rem lightgrey,
+                0 0 0.5rem hsl(0 0 70%);
+}
+
+.user-form select {
+    text-align: left;
+    width: 30rem;
+}
+
+.user-form textarea {
+    resize: none;
+    height: 12rem;
+    width: 27rem;
+    font-size: 1rem;
+    border: none;
+    padding: 1.5rem;
+    align-items: center;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.75rem lightgrey,
+                0 0 0.5rem hsl(0 0 70%);
+}
+
+form button {
+    height: 2.5rem;
+    width: 7rem;
+    background: #7672ce;
+    color: white;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0 0 1rem hsl(0 0 70);
+}
+
+form button:hover {
+    background: white;
+    color: #7672ce;
+}
+
+form button:active {
+    background: #7672ce;
+    color: white;
+}
+
+.detail-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    gap: 6rem;
+    padding: 6rem 5rem;
+}
+
+.detail-page button {
+    font-size: 1rem;
+    width: 6rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: white;
+    box-shadow: 0 0 0.5rem lightgrey;
+}
+
+.back-button {
+    padding: 0.5rem 2rem;
+}
+
+.detail-page img {
+    border-radius: 0.5rem;
+    min-width: 20rem;
+    box-shadow: 0 0.25rem 0.5rem var(--box-shadow);
+}
+
+.detail-page p {
+    font-weight: 300;
+}
+
+.detail-page button:hover {
+    background: #7672ce;
+    color: white;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: row wrap;
+    justify-items: right;
+    gap: 3rem;
+    max-width: 80%;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 0.1rem;
+}
+
+.details p {
+    margin: 0;
+}
+
+.border-countries {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 10rem;
+    max-width: 20rem;
+}
+
+.border-buttons {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: left;
+    gap: 1rem;
+}
+
+.border-buttons button {
+    display:flex;
+    height: fit-content;
+    max-height: 3rem;
+    width: fit-content;
+    max-width: 8rem;
+    padding: 1rem;
+    align-items: center;
+}
+
+.save-button {
+    margin-bottom: 1rem;
+}
+
+.border-buttons button:active {
+    background: white;
+    color: #7672ce;
+}
+
+.saved-countries-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+@media (max-width: 800px){
+    .user-input {
+        flex-flow: row wrap;
+        gap: 2rem;
+        justify-content: left;
+    }
+    
+    .user-input input {
+        width: 30rem;
+    }
+    
+    
+    select {
+        width: 11rem;
+        margin-right: 0;
+    }
+    
+    .detail-page {
+        gap: 3rem;
+        padding: 2rem 0;
+    }
+    
+    .main-content {
+        flex-direction: column;
+        margin: 1rem auto;
+    }
+    
+    .main-content img {
+        margin: 0;
+    }
+    
+}
