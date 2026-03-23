@@ -109,8 +109,6 @@ function SavedCountries({ countries = [] }) {
             console.log(error);
         }
     }
-    
-    console.log('checking user countries', userCountries);
 
     useEffect(() => { 
         getUserCountries();
