@@ -100,11 +100,12 @@ function SavedCountries({ countries = [] }) {
             );
             const data = await response.json();
             setUserCountries(data);
-            console.log(userCountries);
         } catch (error) { 
             console.log(error);
         }
     }
+    
+    console.log('checking user countries', userCountries);
 
     useEffect(() => { 
         getUserCountries();
@@ -118,7 +119,7 @@ function SavedCountries({ countries = [] }) {
                 { newestUserData ?
                             (
                                 userCountries?.map((country) => (
-                                    <CountryCard key={country} country={country} />
+                                    <CountryCard key={country} country={userCountries} />
                                 ))
                              ) : (null)
                 }

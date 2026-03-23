@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function CountryCard({ country}) {
+function CountryCard({ country }) {
 // I was manually loading each value independently, but it was difficult to read and verbose.
     const {
         // In order to access the value inside flags, I discovered that I could nest another destructiring assignment.
