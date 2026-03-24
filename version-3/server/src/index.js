@@ -46,9 +46,7 @@ const getNewestUser = async () => {
         LIMIT 1`
     );
 
-    console.log(newestUser.rows);
-
-    return (newestUser.rows);
+    return (newestUser.rows[0]);
 
 };
 
@@ -163,12 +161,15 @@ app.post('api/add-one-user/', async (req, res) => {
 })
 
 // Ged newest user
-app.get('api/get-newest-user', async (req, res) => {
+app.get('/get-newest-user', async (req, res) => {
+
+    console.log('checkpoint');
+
     try {
 
         const result = await getNewestUser();
 
-        res.json(result.rows)
+        res.json(result)
 
     } catch (error) {
         console.error(error);
