@@ -21,10 +21,10 @@ app.listen(port, () => {
 
 // Helper Functions
 
-// addOneCountry()
+// addOneUser()
 const addOneUser = async (user_name, email, bio ) => {
 
-    let addCountry = await db.query(
+    let addUser = await db.query(
         `
         INSERT INTO users (user_name)
         VALUES ($1, $2, $3)`, [user_name, email, bio]
@@ -114,7 +114,7 @@ const unsaveOneCountry = async (country) => {
 }
 
 // unsaveAllCountries()
-const unsavedAllCountries = async () => {
+const unsaveAllCountries = async () => {
 
     let deleteAll = await db.query(
         `DELETE FROM saved_countries`
@@ -182,7 +182,7 @@ app.post('api/add-one-country/:country', async (req, res) => {
 
         let newCountry = req.params.newCountry;
 
-        const result = await addOneCountry(newCountry);
+        const result = await saveOneCountry(newCountry);
 
         res.send(result);
 
@@ -206,13 +206,14 @@ app.get('api/get-all-saved-countries', async (req, res) => {
     }
 })
 
-app.post('unsave-one-country/:country', async (req, res) => {
+// update-one-country-count/:country
+app.post('update-one-country-count/:country', async (req, res) => {
 
     try {
 
         let country = req.params.country;
 
-        const result = await unsaveOneCountry(country);
+        const result = await updateOneCountryCount(country);
 
         res.send(result.rows);
         
@@ -223,11 +224,13 @@ app.post('unsave-one-country/:country', async (req, res) => {
 
 })
 
-app.post('unsave-all-countries', async (req, res) => {
+app.post('unsave-one-country/:country', async (req, res) => {
 
     try {
 
-        const result = await unsavedAllCountries();
+        let country = req.params.country
+
+        const result = await unsaveOneCountry(country);
 
         res.send(result);
         
@@ -239,12 +242,10 @@ app.post('unsave-all-countries', async (req, res) => {
 })
 
 // update-one-country-count
-app.post('api/update-one-country-count/:country', async (req, res) => {
+app.post('/unsave-all-countries', async (req, res) => {
     try {
 
-        let country = req.params.country;
-
-        const result = updateOneCountryCount(country);
+        const result = unsaveAllCountries();
 
         res.send(result);
 
@@ -252,4 +253,22 @@ app.post('api/update-one-country-count/:country', async (req, res) => {
         console.error(error);
         res.status(500).json('Error resetting country count. Try again.');
     }
+})
+
+// reset-one-country-count
+app.post('/reset-one-country-count/:country', async (req, res) => {
+
+    try {
+        
+        let country = req.params.country;
+
+        const result = await resetOneCountryCount(country);
+
+        res.send(result);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(`Error resetting ${country}'s count. Try again.`)
+    }
+
 })
