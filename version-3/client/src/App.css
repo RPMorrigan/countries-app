@@ -258,6 +258,11 @@ form button:active {
     color: white;
 }
 
+.detail-page button:active {
+    background: lemonchiffon;
+    color: #7672ce
+}
+
 .main-content {
     display: flex;
     flex-direction: row wrap;
@@ -304,11 +309,6 @@ form button:active {
 
 .save-button {
     margin-bottom: 1rem;
-}
-
-.border-buttons button:active {
-    background: white;
-    color: #7672ce;
 }
 
 .saved-countries-wrapper {
