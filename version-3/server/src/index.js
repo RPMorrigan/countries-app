@@ -22,12 +22,12 @@ app.listen(port, () => {
 // Helper Functions
 
 // addOneUser()
-const addOneUser = async (user_name, email, bio ) => {
+const addOneUser = async (name, email, country_name, bio) => {
 
     let addUser = await db.query(
         `
-        INSERT INTO users (user_name)
-        VALUES ($1, $2, $3)`, [user_name, email, bio]
+        INSERT INTO users (name, email, country_name, bio)
+        VALUES ($1, $2, $3, $4)`, [name, email, country_name, bio]
     );
 
     console.log('User added successfully!');
@@ -46,6 +46,8 @@ const getNewestUser = async () => {
         LIMIT 1`
     );
 
+    console.log(newestUser.rows[0]);
+
     return (newestUser.rows[0]);
 
 };
@@ -55,8 +57,10 @@ const saveOneCountry = async (country) => {
 
     let newCountry = await db.query(
         `
-        INSERT INTO saved_countries (country_name)
-        VALUES ($1)`, [country]
+        INSERT INTO country_counts (country_name, count)
+        VALUES ($1, 1)
+        ON CONFLICT (country_name)
+        DO UPDATE SET count = country_counts.count + 1`, [country]
     );
 
     console.log(`${country} was added to saved countries!`);
@@ -81,18 +85,19 @@ const getAllSavedCountries = async () => {
 }
 
 // updateOneCountryCount(country, count)
-const updateOneCountryCount = async (country, count) => {
+const updateOneCountryCount = async (country) => {
 
-    let update = db.query(
+    let update = await db.query(
         `
-        UPDATE saved_countries
-        SET count = $1 + 1
-        WHERE name = $2`, [count, country]
+        INSERT INTO country_counts (country_name, count)
+        VALUES ($1, 1)
+        ON CONFLICT (country_name)
+        DO UPDATE SET count = country_counts.count +1;`, [country]
     );
 
-    console.log(`${country}'s count was successfully set to ${count} `);
+    console.log(`${country}'s count was successfully incremented by 1!`);
 
-    return (`${country}'s count was successfully set to ${count} `);
+    return (`${country}'s count was successfully incremented by 1!`);
 
 }
 
@@ -129,9 +134,9 @@ const resetOneCountryCount = async (country) => {
 
     let resetCount = await db.query(
         `
-        UPDATE saved_countries
-        SET count = 0
-        WHERE name = $1`, [country]
+        UPDATE country_counts
+        SET count = 1
+        WHERE country_name = $1`, [country]
     );
 
     console.log(`${country}'s count was reset successfully!`);
@@ -145,22 +150,22 @@ const resetOneCountryCount = async (country) => {
 // Endpoints
 
 // Add one user
-app.post('api/add-one-user/', async (req, res) => {
+app.post('/add-one-user/', async (req, res) => {
     try {
 
-        const { user_name, email, bio } = req.body;
+        const { name, email, country_name, bio } = req.body;
 
-        const result = await addOneUser(user_name, email, bio);
+        const result = await addOneUser(name, email, country_name, bio);
 
         res.send(result);
 
     } catch (error) {
         console.error(error);
-        res.status(500).json('Error adding user. Try again.');
+        res.status(500).json(`Error adding user. ${error.message}`);
     }
 })
 
-// Ged newest user
+// Get newest user
 app.get('/get-newest-user', async (req, res) => {
 
     console.log('checkpoint');
@@ -173,42 +178,42 @@ app.get('/get-newest-user', async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json('Error getting newest user. Try again.');
+        res.status(500).json(`Error getting newest user. ${error.message}`);
     }
 })
 
 // save-one-country
-app.post('api/add-one-country/:country', async (req, res) => {
+app.post('/save-one-country/:country', async (req, res) => {
     try {
 
-        let newCountry = req.params.newCountry;
-
-        const result = await saveOneCountry(newCountry);
+        let country = req.params.country;
+        console.log('attempting to save country:', country);
+        const result = await saveOneCountry(country);
 
         res.send(result);
 
     } catch (error) {
-        console.error(error);
-        res.status(500).json('Error adding country. Try again.');
+        console.error('Complete error details:', error);
+        res.status(500).json(`Error adding country. ${error.message}`);
     }
 })
 
 // get-all-saved countries
-app.get('api/get-all-saved-countries', async (req, res) => {
+app.get('/get-all-saved-countries', async (req, res) => {
     try {
 
-        const result = getAllSavedCountries();
+        const result = await getAllSavedCountries();
 
-            res.json(result.rows)
+            res.json(result)
 
     } catch (error) {
         console.error(error);
-        res.status(500).json('Error getting countries. Try again.');
+        res.status(500).json(`Error getting countries. ${error.message}`);
     }
 })
 
 // update-one-country-count/:country
-app.post('update-one-country-count/:country', async (req, res) => {
+app.post('/update-one-country-count/:country', async (req, res) => {
 
     try {
 
@@ -216,16 +221,16 @@ app.post('update-one-country-count/:country', async (req, res) => {
 
         const result = await updateOneCountryCount(country);
 
-        res.send(result.rows);
+        res.send(result);
         
     } catch (error) {
         console.error(error);
-        res.status*(500).json('Error unsaving country. Try again.')
+        res.status(500).json(`Error unsaving country. ${error.message}`)
     }
 
 })
 
-app.post('unsave-one-country/:country', async (req, res) => {
+app.post('/unsave-one-country/:country', async (req, res) => {
 
     try {
 
@@ -237,7 +242,7 @@ app.post('unsave-one-country/:country', async (req, res) => {
         
     } catch (error) {
         console.error(error);
-        res.status*(500).json('Error unsaving countries. Try again.')
+        res.status(500).json(`Error unsaving countries. ${error.message}`)
     }
 
 })
@@ -246,13 +251,13 @@ app.post('unsave-one-country/:country', async (req, res) => {
 app.post('/unsave-all-countries', async (req, res) => {
     try {
 
-        const result = unsaveAllCountries();
+        const result = await unsaveAllCountries();
 
         res.send(result);
 
     } catch (error) {
         console.error(error);
-        res.status(500).json('Error resetting country count. Try again.');
+        res.status(500).json(`Error unsaving all countries. ${error.message}`);
     }
 })
 
@@ -269,7 +274,7 @@ app.post('/reset-one-country-count/:country', async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json(`Error resetting ${country}'s count. Try again.`)
+        res.status(500).json(`Error resetting ${country}'s count. ${error.message}`)
     }
 
 })
