@@ -22,6 +22,7 @@ app.listen(port, () => {
 // Helper Functions
 
 // addOneUser()
+// The arrow function passes through the params listed in the parenthesis
 const addOneUser = async (name, email, country_name, bio) => {
 
     let addUser = await db.query(
