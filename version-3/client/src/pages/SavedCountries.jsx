@@ -45,7 +45,7 @@ function SavedCountries({ countries = [] }) {
         );
         
             // Formats the API's reply to a json then stores it into result which is then console logged for debugging.
-            const result = await response.json();
+            const result = await response.text();
             console.log('result', result);
     };
     
@@ -56,6 +56,9 @@ function SavedCountries({ countries = [] }) {
             console.log(formData);
             await storeFormData(formData);
     
+            // Makes sure our latest user is loaded onto our page.
+            await getNewestUserData();
+
             // Resets the form.
             setFormData({
                 fullName: '',
@@ -76,7 +79,7 @@ function SavedCountries({ countries = [] }) {
                 }
             );
             const data = await response.json();
-            const userData = data[0];
+            const userData = data;
             setNewestUserData({
                 fullName: userData.name,
                 email: userData.email,
