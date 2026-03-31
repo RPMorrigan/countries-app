@@ -21,19 +21,20 @@ const CountryDetail = ({ countries = [] }) => {
         const getViewCount = async () => {
             try {
                 let response = await fetch(
-                    '/api/update-one-country-count',
+                    `/api/update-one-country-count`,
                     {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            "country_name": country.name.common
+                            "country_name": countryName
                         })
                     }
                 );
+
                 const data = await response.json();
-                setViewCount(data.count);
+                setViewCount(data.rows[0].count);
             } catch (error) {
                 console.log('Error: ' + error.message);
             }
@@ -41,7 +42,7 @@ const CountryDetail = ({ countries = [] }) => {
         
         // Call getViewCount every time the country name changes.
         getViewCount();
-    }, [country]);
+    }, [country, countryName]);
     
     // Checks that the data is present in our console for debugging.
     console.log(viewCount);

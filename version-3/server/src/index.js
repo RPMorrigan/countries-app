@@ -53,20 +53,18 @@ const getNewestUser = async () => {
 
 };
 
-// saveOneCountry(country)
-const saveOneCountry = async (country) => {
+// saveOneCountry(country_name)
+const saveOneCountry = async (country_name) => {
 
     let newCountry = await db.query(
         `
-        INSERT INTO country_counts (country_name, count)
-        VALUES ($1, 1)
-        ON CONFLICT (country_name)
-        DO UPDATE SET count = country_counts.count + 1`, [country]
+        INSERT INTO saved_countries (country_name)
+        VALUES ($1)`, [country_name]
     );
 
-    console.log(`${country} was added to saved countries!`);
+    console.log(`${country_name} was added to saved countries!`);
 
-    return (`${country} was added to saved countries!`);
+    return (`${country_name} was added to saved countries!`);
 
 };
 
@@ -85,20 +83,21 @@ const getAllSavedCountries = async () => {
 
 }
 
-// updateOneCountryCount(country, count)
+// updateOneCountryCount(country)
 const updateOneCountryCount = async (country) => {
 
-    let update = await db.query(
+    let result = await db.query(
         `
         INSERT INTO country_counts (country_name, count)
         VALUES ($1, 1)
         ON CONFLICT (country_name)
-        DO UPDATE SET count = country_counts.count +1;`, [country]
+        DO UPDATE SET count = country_counts.count +1
+        RETURNING count`, [country]
     );
 
     console.log(`${country}'s count was successfully incremented by 1!`);
 
-    return (`${country}'s count was successfully incremented by 1!`);
+    return result;
 
 }
 
@@ -184,12 +183,12 @@ app.get('/get-newest-user', async (req, res) => {
 })
 
 // save-one-country
-app.post('/save-one-country/:country', async (req, res) => {
+app.post('/save-one-country', async (req, res) => {
     try {
 
-        let country = req.params.country;
-        console.log('attempting to save country:', country);
-        const result = await saveOneCountry(country);
+        const { country_name } = req.body;
+
+        const result = await saveOneCountry(country_name);
 
         res.send(result);
 
@@ -213,16 +212,18 @@ app.get('/get-all-saved-countries', async (req, res) => {
     }
 })
 
-// update-one-country-count/:country
-app.post('/update-one-country-count/:country', async (req, res) => {
+// update-one-country-count/
+app.post('/update-one-country-count/', async (req, res) => {
 
     try {
 
-        let country = req.params.country;
+        let { country_name } = req.body;
 
-        const result = await updateOneCountryCount(country);
+        const result = await updateOneCountryCount(country_name);
 
-        res.send(result);
+        console.log(result);
+
+        res.json(result)
         
     } catch (error) {
         console.error(error);
