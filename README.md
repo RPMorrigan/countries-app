@@ -23,29 +23,31 @@ Instructions to include a screenshot into your README file:
 ## ✨ Features
 
 This is what you can do on the app: 
-- ____________
-- ____________
-- ____________
-- ____________
+- Browse & search every country on the planet, with some info at a glance.
+- Click a flag to gain more in depth knowledge as well as a list of bordering countries.
+- Easily save a country at a button press for later quick access.
+- Quick access to bordering countries from a country's detail page.
+- Profile creation which includes your country of origin.
 
 ## 🛠️ Tech Stack
 
 **Frontend**
 
-- **Languages:** ___________
-- **Framework:** ___________
-- **Deployment:** ___________
+- **Languages:** HTML, CSS, ,JS, JSX
+- **Framework:** REACT, NEXT.js
+- **Build Tool:** Vite
+- **Deployment:** Netlify, GitHub Pages
 
-**Server/API**
+**Server/API:** REST
 
-- **Languages:** ___________
-- **Framework:** ___________
-- **Deployment:** ___________
+- **Languages:** JS(Node.js)
+- **Framework:** Express.js, Next.js
+- **Deployment:** Render
 
-**Database**
+**Database:** NEON
 
-- **Languages:** ___________
-- **Deployment:** ___________
+- **Languages:** PostgreSQL
+- **Deployment:** 
 
 ## 🔹 API Documentation
 
