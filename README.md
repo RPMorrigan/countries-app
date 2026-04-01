@@ -68,24 +68,59 @@ Here's the link to the full API documentation:
 Here’s the SQL I used to create my tables:  
 
 ```sql
-Put your CREATE TABLE statements here!
-If you have more than one table, include them all.
+
+CREATE TABLE country_counts (
+	country_count_id	SERIAL PRIMARY KEY,
+  	country_name		VARCHAR NOT NULL UNIQUE,
+  	count				INTEGER NOT NULL
+);
+
+INSERT INTO country_counts (country_name, count)
+VALUES	('Mexico', 1),
+		('Cuba', 1),
+        ('Brazil', 1),
+        ('Ethiopia', 1);
+
+CREATE TABLE saved_countries (
+	saved_country_id	SERIAL PRIMARY KEY,
+  	country_name		VARCHAR NOT NULL UNIQUE
+);
+
+INSERT INTO saved_countries (country_name)
+VALUES	('Ethiopia'),
+		('Brazil'),
+        ('Mexico'),
+        ('Skyrim'),
+        ('Morrowind');
+
+CREATE TABLE users(
+	user_id 		SERIAL PRIMARY KEY,
+  	name			VARCHAR NOT NULL,
+  	country_name 	VARCHAR NOT NULL,
+  	email			VARCHAR NOT NULL UNIQUE,
+  	bio				VARCHAR
+);
+
+INSERT INTO users (name, country_name, email, bio)
+VALUES 	('Enpie Sea', 'Skyrim', 'fyord@dragonborn.com', 'The one and only.'),
+		('Kajit Kajit', 'Skyrim', 'kajit@haswares.com', 'Kajit has wares, if dragonborn have coin.'),
+        ('Malacath of Morrowind', 'Morrowind', 'malacath@morrowind.com', 'The Daedric Prince of lies, deception and hypocrisy, the spurned and the ostracized, the keeper of the Sworn Oath, and the Bloody Curse.');
+
 ```
 
 ## 💭 Reflections
 
-**What I learned:** ___________
+**What I learned:** I learned how our tech stack chains together, from database to the userpage.
 
-**What I'm proud of:** ___________
+**What I'm proud of:** I'm proud of my competent understanding of the subject matter and technologies we use to do everything.
 
-**What challenged me:** ___________
+**What challenged me:** Sometimes I would lose a trail. Meaning the path of our request and then the path back to the front page.
 
 **Future ideas for how I'd continue building this project:** 
-1. ___________
-2. ___________
-3. ___________
+1. I haven't applied to much sorting. But I would like to. Maybe add some different filters.
+2. Perhaps some more advanced animations.
+3. Adding credentials to our form, and a login screen.
 
 ## 🙌 Credits & Shoutouts 
 
-If you used any resources for inspiration, tutorials, or documentation, you can mention them here.
-You can also give a shoutout to anyone who helped you along the way.
+Shoutout to Arianna and Phil. Couldn't have done it without you. I would also like to mention that I used a lot of different youtubers to help me learn how to organize my projects and my roadmaps a bit better. I'd like to acknowledge all of my cohorts whom have, without knowing, challenged me to do better. 
