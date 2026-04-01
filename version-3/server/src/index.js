@@ -21,7 +21,7 @@ app.listen(port, () => {
 
 // Helper Functions
 
-// addOneUser()
+// 1. addOneUser()
 // The arrow function passes through the params listed in the parenthesis
 const addOneUser = async (name, email, country_name, bio) => {
 
@@ -37,7 +37,7 @@ const addOneUser = async (name, email, country_name, bio) => {
 
 }
 
-// getNewestUser()
+// 2. getNewestUser()
 const getNewestUser = async () => {
 
     let newestUser = await db.query(
@@ -53,7 +53,7 @@ const getNewestUser = async () => {
 
 };
 
-// saveOneCountry(country_name)
+// 3. saveOneCountry(country_name)
 const saveOneCountry = async (country_name) => {
 
     let newCountry = await db.query(
@@ -68,7 +68,7 @@ const saveOneCountry = async (country_name) => {
 
 };
 
-// getAllSavedCountries()
+// 4. getAllSavedCountries()
 const getAllSavedCountries = async () => {
 
     let allCountries = await db.query(
@@ -83,7 +83,7 @@ const getAllSavedCountries = async () => {
 
 }
 
-// updateOneCountryCount(country)
+// 5. updateOneCountryCount(country)
 const updateOneCountryCount = async (country) => {
 
     let result = await db.query(
@@ -101,7 +101,7 @@ const updateOneCountryCount = async (country) => {
 
 }
 
-// unsaveOneCountry(country)
+// 6. unsaveOneCountry(country)
 const unsaveOneCountry = async (country) => {
 
     let unsaved = await db.query(
@@ -116,7 +116,7 @@ const unsaveOneCountry = async (country) => {
 
 }
 
-// unsaveAllCountries()
+// 7. unsaveAllCountries()
 const unsaveAllCountries = async () => {
 
     let deleteAll = await db.query(
@@ -129,7 +129,7 @@ const unsaveAllCountries = async () => {
 
 }
 
-// resetOneCountryCount(country)
+// 8. resetOneCountryCount(country)
 const resetOneCountryCount = async (country) => {
 
     let resetCount = await db.query(
@@ -149,7 +149,7 @@ const resetOneCountryCount = async (country) => {
 
 // Endpoints
 
-// Add one user
+// 1. Add one user
 app.post('/add-one-user/', async (req, res) => {
     try {
 
@@ -165,7 +165,7 @@ app.post('/add-one-user/', async (req, res) => {
     }
 })
 
-// Get newest user
+// 2. Get newest user
 app.get('/get-newest-user', async (req, res) => {
 
     console.log('checkpoint');
@@ -182,7 +182,7 @@ app.get('/get-newest-user', async (req, res) => {
     }
 })
 
-// save-one-country
+// 3. save-one-country
 app.post('/save-one-country', async (req, res) => {
     try {
 
@@ -198,7 +198,7 @@ app.post('/save-one-country', async (req, res) => {
     }
 })
 
-// get-all-saved countries
+// 4. get-all-saved countries
 app.get('/get-all-saved-countries', async (req, res) => {
     try {
 
@@ -212,7 +212,7 @@ app.get('/get-all-saved-countries', async (req, res) => {
     }
 })
 
-// update-one-country-count/
+// 5. update-one-country-count/
 app.post('/update-one-country-count/', async (req, res) => {
 
     try {
@@ -232,6 +232,7 @@ app.post('/update-one-country-count/', async (req, res) => {
 
 })
 
+// 6. unsave-one-country/:country
 app.post('/unsave-one-country/:country', async (req, res) => {
 
     try {
@@ -249,7 +250,7 @@ app.post('/unsave-one-country/:country', async (req, res) => {
 
 })
 
-// update-one-country-count
+// 7. update-one-country-count
 app.post('/unsave-all-countries', async (req, res) => {
     try {
 
@@ -263,7 +264,7 @@ app.post('/unsave-all-countries', async (req, res) => {
     }
 })
 
-// reset-one-country-count
+// 8. reset-one-country-count
 app.post('/reset-one-country-count/:country', async (req, res) => {
 
     try {
