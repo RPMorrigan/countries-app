@@ -47,16 +47,21 @@ This is what you can do on the app:
 **Database:** NEON
 
 - **Languages:** PostgreSQL
-- **Deployment:** 
+- **Deployment:** NEON
 
 ## 🔹 API Documentation
 
 These are the API endpoints I built: 
-1. ___________
-2. ___________
-3. ___________
+1. /add-one-user/
+2. /get-newest-user/
+3. /save-one-country/
+4. /get-all-saved-countries/
+5. /update-one-country-count/
+6. /unsave-one-country/:country
+7. /unsave-all-countries/
+8. /reset-one-country-count/:country
 
-Here's the link to the full API documentation: __________
+Here's the link to the full API documentation: 
 
 ## 🗄️ Database Schema
 
