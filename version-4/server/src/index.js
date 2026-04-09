@@ -2,7 +2,6 @@
 // Also sets up our server with easy variables to use in the rest of the code.
 import express from 'express';
 import pg from 'pg';
-import config from './config.js';
 
 const app = express();
 const port = 3000;
