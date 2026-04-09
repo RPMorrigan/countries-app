@@ -8,8 +8,8 @@ const app = express();
 const port = 3000;
 
 const db = new pg.Pool({
-    connectionString: config.databaseUrl,
-    ssl: true
+    connectionString: process.env.DATABASE_URL,
+    ssl: true // use SSL
 })
 
 app.use(express.json());

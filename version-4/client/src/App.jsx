@@ -16,9 +16,11 @@ function App() {
             let response = await fetch(
                 'https://restcountries.com/v3.1/independent?status=true&fields=flags,capital,name,population,region,borders,cca3'
             );
-            const data = await response.json();
-            console.log(data);
-            setCountries(data);           
+          const data = await response.json();
+          const sortedCountries = [...data].sort((a, b) => a.name.common.localeCompare(b.name.common, undefined, { sensitivity: 'base' })
+          );
+            console.log(sortedCountries);
+            setCountries(sortedCountries);           
         } catch (error) {
       console.log('Error: ' + error.message);
         }
