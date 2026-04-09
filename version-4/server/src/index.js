@@ -220,9 +220,9 @@ app.post('/update-one-country-count/', async (req, res) => {
 
         const result = await updateOneCountryCount(country_name);
 
-        console.log(result);
+        console.log(`${ country_name }'s count was updated successfully`);
 
-        res.json(result)
+        res.json(`${country_name}'s count was updated successfully`);
         
     } catch (error) {
         console.error(error);
