@@ -42,20 +42,20 @@ This is what you can do on the app:
 
 **Frontend**
 
-- **Languages:** HTML, CSS, ,JS, JSX
-- **Framework:** REACT, NEXT.js
+- **Languages:** HTML, CSS, ,Javascript
+- **Framework:** REACT
 - **Build Tool:** Vite
-- **Deployment:** Netlify, GitHub Pages
+- **Deployment:** Netlify
 
 **Server/API:** REST
 
 - **Languages:** JS(Node.js)
-- **Framework:** Express.js, Next.js
+- **Framework:** Express.js
 - **Deployment:** Render
 
 **Database:** NEON
 
-- **Languages:** PostgreSQL
+- **Languages:** SQL (PostgreSQL)
 - **Deployment:** NEON
 
 ## 🔹 API Documentation
