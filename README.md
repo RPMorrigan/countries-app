@@ -70,7 +70,7 @@ These are the API endpoints I built:
 7. /unsave-all-countries/
 8. /reset-one-country-count/:country
 
-Here's the link to the full API documentation: 
+Here's the link to the [full API documentation](https://github.com/RPMorrigan/countries-app/blob/main/version-4/server/documentation.md)
 
 ## 🗄️ Database Schema
 
